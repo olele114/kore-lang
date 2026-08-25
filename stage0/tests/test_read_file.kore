@@ -1,0 +1,4 @@
+main :: () void => {
+    content := read_file("tests/data.txt")
+    print(content)
+}

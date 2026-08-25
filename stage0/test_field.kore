@@ -1,0 +1,5 @@
+Point :: {
+    x, y i32
+}
+
+get_x :: (p Point) i32 => p.x

@@ -1,0 +1,6 @@
+test :: () void => {
+    ~i := 0
+    @ i < 10 {
+        print("test")
+    }
+}

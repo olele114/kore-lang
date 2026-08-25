@@ -1,0 +1,9 @@
+Point :: {x, y i32}
+
+test :: (p Point) void => {
+    p
+}
+
+main :: () void => {
+    test(Point{x: 10, y: 20})
+}

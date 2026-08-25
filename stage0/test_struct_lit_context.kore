@@ -1,0 +1,10 @@
+Point :: struct { x i32, y i32 }
+
+test1 :: () void => {
+    p := Point{x: 1, y: 2}
+}
+
+test2 :: () i32 => {
+    ? 1 < Point{x: 1, y: 2}.x => 42
+    _ => 0
+}

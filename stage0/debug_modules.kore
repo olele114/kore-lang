@@ -1,0 +1,3 @@
+pub helper :: () i32 => {
+    ret 42
+}

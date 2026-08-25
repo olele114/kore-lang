@@ -1,0 +1,53 @@
+// Unicode 边界测试用例
+// 测试词法分析器对各种 Unicode 边界字符的处理
+
+// 零宽连接符 (Zero-Width Joiner)
+id‍entifier :: i32 = 42
+
+// 零宽非连接符 (Zero-Width Non-Joiner)
+id‌entifier2 :: i32 = 43
+
+// 组合字符 (Combining Diacritical Marks)
+idéntifiêr :: i32 = 44
+
+// 从右到左标记 (Right-to-Left Mark)
+id‏entifier3 :: i32 = 45
+
+// 从右到左覆盖 (Right-to-Left Override)
+id‮reifitned :: i32 = 46
+
+// 双向文本混合
+arabic_عربي_identifier :: i32 = 47
+hebrew_עברית_identifier :: i32 = 48
+
+// 零宽空格 (Zero-Width Space)
+id​entifier4 :: i32 = 49
+
+// 表情符号
+emoji_🔥_identifier :: i32 = 50
+multi_emoji_👨‍👩‍👧‍👦_family :: i32 = 51
+
+// 高代理对区域字符 (Surrogate pairs)
+chinese_中文标识符 :: i32 = 52
+japanese_日本語識別子 :: i32 = 53
+
+// 组合多个 Unicode 问题
+complex_éモジ‍🔥_id :: i32 = 54
+
+// 规范化测试：é (单一字符) vs é (e + combining acute)
+normalized :: i32 = 55
+normalizéd :: i32 = 56
+
+// 不可见字符
+invisible_­_soft_hyphen :: i32 = 57
+
+// 字节顺序标记 (BOM) - 如果出现在中间
+bom_test :: i32 = 58  // ﻿可能的 BOM
+
+// 行终止符变体
+windows_line_ending :: i32 = 59
+unix_line_ending :: i32 = 60
+
+// Unicode 空白变体
+nbsp_test :: i32 = 61  //  (U+00A0)
+em_space_test :: i32 = 62  //   (U+2003)

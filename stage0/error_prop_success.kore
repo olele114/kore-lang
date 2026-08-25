@@ -1,0 +1,18 @@
+divide :: (a i32, b i32) i32 ! str => {
+    ? b == 0 => ret .Err("division by zero")
+    ret .Ok(a / b)
+}
+
+safe_divide :: (x i32, y i32, z i32) i32 ! str => {
+    result1 := divide(x, y)!
+    result2 := divide(result1, z)!
+    ret .Ok(result2)
+}
+
+main :: () i32 => {
+    result := safe_divide(20, 2, 5)
+    ret ? result is {
+        .Ok(v) => v,
+        .Err(_) => -1
+    }
+}

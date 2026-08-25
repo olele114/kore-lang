@@ -1,0 +1,13 @@
+simple_loop :: () void => {
+    @ {
+        ret
+    }
+}
+
+nested_loop :: () void => {
+    @ {
+        @ {
+            skip
+        }
+    }
+}

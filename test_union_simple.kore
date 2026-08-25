@@ -1,0 +1,10 @@
+Result :: .Ok(i32) | .Err(i32)
+
+test_ok :: () i32 => {
+    x := .Ok(42)
+    ret 0
+}
+
+main :: () i32 => {
+    ret test_ok()
+}

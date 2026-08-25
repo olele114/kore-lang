@@ -1,0 +1,7 @@
+fn test_slice :: (s []i32) void => {
+    print("slice length check")
+}
+
+main :: () void => {
+    test_slice([3]i32{1, 2, 3})
+}

@@ -1,0 +1,7 @@
+test :: () void => {
+    @outer @ {
+        @ {
+            ret
+        }
+    }
+}

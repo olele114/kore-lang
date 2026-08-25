@@ -1,0 +1,11 @@
+main :: () i32 => {
+    print("This goes to stdout")
+    eprint("This goes to stderr")
+    println("stdout with newline")
+    eprintln("stderr with newline")
+
+    eprint("Error: ")
+    eprintln("something went wrong")
+
+    ret 0
+}

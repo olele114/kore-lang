@@ -1,0 +1,4 @@
+main :: () void => {
+    println("First line")
+    println("Second line")
+}

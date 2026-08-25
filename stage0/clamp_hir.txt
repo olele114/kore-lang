@@ -1,0 +1,398 @@
+    name: "clamp",
+    params: [
+        HirParam {
+            name: "x",
+            ty: Int {
+                width: 32,
+                signed: true,
+            },
+            span: Span {
+                file: FileId(
+                    0,
+                ),
+                lo: 10,
+                hi: 11,
+            },
+        },
+    ],
+    ret_type: Int {
+        width: 32,
+        signed: true,
+    },
+    body: Some(
+        HirBody {
+            blocks: [
+                HirBlock {
+                    id: BlockId(
+                        0,
+                    ),
+                    stmts: [
+                        Assign {
+                            lhs: Local(
+                                LocalId(
+                                    1,
+                                ),
+                            ),
+                            rhs: Use(
+                                Const(
+                                    Bool(
+                                        true,
+                                    ),
+                                ),
+                            ),
+                            span: Span {
+                                file: FileId(
+                                    0,
+                                ),
+                                lo: 30,
+                                hi: 71,
+                            },
+                        },
+                    ],
+                    terminator: Unreachable,
+                    span: Span {
+                        file: FileId(
+                            0,
+                        ),
+                        lo: 9,
+                        hi: 89,
+                    },
+                },
+                HirBlock {
+                    id: BlockId(
+                        2,
+                    ),
+                    stmts: [],
+                    terminator: Return(
+                        Some(
+                            Const(
+                                Int(
+                                    0,
+                                ),
+                            ),
+                        ),
+                    ),
+                    span: Span {
+                        file: FileId(
+                            0,
+                        ),
+                        lo: 30,
+                        hi: 71,
+                    },
+                },
+                HirBlock {
+                    id: BlockId(
+                        3,
+                    ),
+                    stmts: [
+                        Assign {
+                            lhs: Local(
+                                LocalId(
+                                    2,
+                                ),
+                            ),
+                            rhs: Use(
+                                Place(
+                                    Local(
+                                        LocalId(
+                                            0,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            span: Span {
+                                file: FileId(
+                                    0,
+                                ),
+                                lo: 32,
+                                hi: 35,
+                            },
+                        },
+                        Assign {
+                            lhs: Local(
+                                LocalId(
+                                    3,
+                                ),
+                            ),
+                            rhs: BinaryOp {
+                                op: Lt,
+                                lhs: Place(
+                                    Local(
+                                        LocalId(
+                                            2,
+                                        ),
+                                    ),
+                                ),
+                                rhs: Const(
+                                    Int(
+                                        0,
+                                    ),
+                                ),
+                            },
+                            span: Span {
+                                file: FileId(
+                                    0,
+                                ),
+                                lo: 32,
+                                hi: 37,
+                            },
+                        },
+                        Assign {
+                            lhs: Local(
+                                LocalId(
+                                    4,
+                                ),
+                            ),
+                            rhs: Use(
+                                Place(
+                                    Local(
+                                        LocalId(
+                                            0,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            span: Span {
+                                file: FileId(
+                                    0,
+                                ),
+                                lo: 53,
+                                hi: 56,
+                            },
+                        },
+                        Assign {
+                            lhs: Local(
+                                LocalId(
+                                    5,
+                                ),
+                            ),
+                            rhs: BinaryOp {
+                                op: Gt,
+                                lhs: Place(
+                                    Local(
+                                        LocalId(
+                                            4,
+                                        ),
+                                    ),
+                                ),
+                                rhs: Const(
+                                    Int(
+                                        100,
+                                    ),
+                                ),
+                            },
+                            span: Span {
+                                file: FileId(
+                                    0,
+                                ),
+                                lo: 53,
+                                hi: 60,
+                            },
+                        },
+                    ],
+                    terminator: Return(
+                        Some(
+                            Const(
+                                Int(
+                                    100,
+                                ),
+                            ),
+                        ),
+                    ),
+                    span: Span {
+                        file: FileId(
+                            0,
+                        ),
+                        lo: 30,
+                        hi: 71,
+                    },
+                },
+                HirBlock {
+                    id: BlockId(
+                        4,
+                    ),
+                    stmts: [],
+                    terminator: Switch {
+                        discr: Place(
+                            Local(
+                                LocalId(
+                                    3,
+                                ),
+                            ),
+                        ),
+                        targets: [
+                            (
+                                1,
+                                BlockId(
+                                    2,
+                                ),
+                            ),
+                        ],
+                        otherwise: BlockId(
+                            5,
+                        ),
+                    },
+                    span: Span {
+                        file: FileId(
+                            0,
+                        ),
+                        lo: 30,
+                        hi: 71,
+                    },
+                },
+                HirBlock {
+                    id: BlockId(
+                        5,
+                    ),
+                    stmts: [],
+                    terminator: Switch {
+                        discr: Place(
+                            Local(
+                                LocalId(
+                                    5,
+                                ),
+                            ),
+                        ),
+                        targets: [
+                            (
+                                1,
+                                BlockId(
+                                    3,
+                                ),
+                            ),
+                        ],
+                        otherwise: BlockId(
+                            3,
+                        ),
+                    },
+                    span: Span {
+                        file: FileId(
+                            0,
+                        ),
+                        lo: 30,
+                        hi: 71,
+                    },
+                },
+                HirBlock {
+                    id: BlockId(
+                        2,
+                    ),
+                    stmts: [],
+                    terminator: Unreachable,
+                    span: Span {
+                        file: FileId(
+                            0,
+                        ),
+                        lo: 30,
+                        hi: 46,
+                    },
+                },
+                HirBlock {
+                    id: BlockId(
+                        3,
+                    ),
+                    stmts: [],
+                    terminator: Unreachable,
+                    span: Span {
+                        file: FileId(
+                            0,
+                        ),
+                        lo: 30,
+                        hi: 71,
+                    },
+                },
+            ],
+            locals: [
+                HirLocal {
+                    name: Some(
+                        "x",
+                    ),
+                    ty: Int {
+                        width: 32,
+                        signed: true,
+                    },
+                    span: Span {
+                        file: FileId(
+                            0,
+                        ),
+                        lo: 10,
+                        hi: 11,
+                    },
+                },
+                HirLocal {
+                    name: None,
+                    ty: Bool,
+                    span: Span {
+                        file: FileId(
+                            0,
+                        ),
+                        lo: 30,
+                        hi: 71,
+                    },
+                },
+                HirLocal {
+                    name: None,
+                    ty: Int {
+                        width: 32,
+                        signed: true,
+                    },
+                    span: Span {
+                        file: FileId(
+                            0,
+                        ),
+                        lo: 32,
+                        hi: 35,
+                    },
+                },
+                HirLocal {
+                    name: None,
+                    ty: Bool,
+                    span: Span {
+                        file: FileId(
+                            0,
+                        ),
+                        lo: 32,
+                        hi: 37,
+                    },
+                },
+                HirLocal {
+                    name: None,
+                    ty: Int {
+                        width: 32,
+                        signed: true,
+                    },
+                    span: Span {
+                        file: FileId(
+                            0,
+                        ),
+                        lo: 53,
+                        hi: 56,
+                    },
+                },
+                HirLocal {
+                    name: None,
+                    ty: Bool,
+                    span: Span {
+                        file: FileId(
+                            0,
+                        ),
+                        lo: 53,
+                        hi: 60,
+                    },
+                },
+            ],
+            entry_block: BlockId(
+                0,
+            ),
+        },
+    ),
+    span: Span {
+        file: FileId(
+            0,
+        ),
+        lo: 9,
+        hi: 89,
+    },
+}
+HirFunction {
+    name: "main",

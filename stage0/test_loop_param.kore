@@ -1,0 +1,6 @@
+test :: (limit i32) void => {
+    ~i := 0
+    @ i < limit {
+        ret
+    }
+}

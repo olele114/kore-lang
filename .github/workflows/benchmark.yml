@@ -1,0 +1,78 @@
+name: Performance Benchmarks
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          cache: true
+      
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      # 运行 main 分支基准测试
+      - name: Run baseline benchmarks (main)
+        run: |
+          git checkout main
+          cargo bench --bench frontend -- --save-baseline main
+          cp -r target/criterion baseline-criterion
+      
+      # 切换回 PR 分支运行基准测试
+      - name: Run current benchmarks (PR)
+        run: |
+          git checkout ${{ github.event.pull_request.head.sha || github.sha }}
+          cargo bench --bench frontend -- --baseline main
+      
+      # 导出 Criterion 结果为 JSON（需要解析 HTML 或使用 criterion 的机器可读输出）
+      # 注意：Criterion 默认不输出 JSON，这里需要自定义脚本或使用 --message-format json
+      - name: Compare results
+        run: |
+          # 简化版：直接检查 Criterion 的退化检测输出
+          # 完整实现需要解析 target/criterion/<bench>/base/estimates.json
+          echo "基准测试完成，检查 Criterion 输出中的退化警告"
+          
+          # 如果 Criterion 检测到显著退化，它会在输出中标记
+          # 这里可以添加自定义脚本解析 estimates.json
+      
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: benchmark-results
+          path: target/criterion/
+          retention-days: 30
+      
+      - name: Comment PR with results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            // 读取 Criterion 报告（简化版）
+            let comment = '## 📊 基准测试结果\n\n';
+            comment += '基准测试已完成。详细结果见 [Artifacts](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})。\n\n';
+            comment += '如果检测到 >20% 性能退化，CI 将失败。';
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

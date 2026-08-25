@@ -1,0 +1,14 @@
+Result :: .Ok(i32) | .Err(i32)
+
+test :: () i32 => {
+    r := .Err(100)
+    ? r is {
+        .Ok(v) => ret v,
+        .Err(e) => ret e
+    }
+    ret 999
+}
+
+main :: () i32 => {
+    ret test()
+}

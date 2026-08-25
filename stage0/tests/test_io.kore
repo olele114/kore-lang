@@ -1,0 +1,4 @@
+main :: () void => {
+    write_file("output.txt", "Hello from Kore!")
+    print(read_file("output.txt"))
+}

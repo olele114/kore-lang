@@ -1,0 +1,5 @@
+use debug_modules
+
+main :: () i32 => {
+    ret debug_modules.helper()
+}

@@ -1,0 +1,5 @@
+Point :: {x, y i32}
+
+main :: () void => {
+    Point{x: 10, y: 20}
+}

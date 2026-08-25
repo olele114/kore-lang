@@ -1,0 +1,49 @@
+# Rust
+# 不加前导斜杠：cargo workspace 在 stage0/，锚定到仓库根会漏掉 stage0/target/
+target/
+Cargo.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Coverage
+lcov.info
+*.profraw
+*.profdata
+
+# Benchmarks
+/criterion/
+
+# Fuzzing
+fuzz/target/
+fuzz/corpus/
+fuzz/artifacts/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Scratch
+.scratch/
+
+# 手工调试留下的编译产物。
+# stage0/tests/ 下混放了两类东西：*.kore 与 *.c 是手写的测试输入和驱动，
+# 要跟踪；下面这些是 korec/clang 的输出，不跟踪。
+# 目前没有任何测试引用它们（已 grep 确认），所以不存在误伤 golden 文件。
+stage0/tests/*.ll
+stage0/tests/*.bc
+stage0/tests/*.o
+stage0/tests/*.out
+stage0/tests/data.txt
+
+# 同目录下的无扩展名可执行文件（korec -o 的默认产物）。
+# 无法用通配符区分于源文件，逐个列出。
+stage0/tests/print_hello
+stage0/tests/slice_idx
+stage0/tests/test_args
+stage0/tests/test_call
+stage0/tests/test_main_minimal

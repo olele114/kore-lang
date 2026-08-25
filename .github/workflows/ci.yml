@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          cache: true
+      
+      - name: Run tests
+        run: cargo test --workspace --all-features
+        working-directory: stage0
+  
+  coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          cache: true
+      
+      - name: Install llvm-cov
+        run: cargo install cargo-llvm-cov --locked
+      
+      - name: Generate coverage
+        run: cargo llvm-cov --workspace --lcov --output-path lcov.info
+        working-directory: stage0
+      
+      - name: Check 90% coverage threshold
+        run: |
+          cargo llvm-cov --workspace --fail-under-lines 90
+        working-directory: stage0
+      
+      - name: Upload coverage to artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: stage0/lcov.info
+          retention-days: 30
+
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: test
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          cache: true
+      
+      - name: Run benchmarks
+        run: cargo bench --bench frontend --no-fail-fast
+        working-directory: stage0
+      
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: benchmark-results
+          path: stage0/target/criterion/
+          retention-days: 30

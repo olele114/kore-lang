@@ -1,0 +1,7 @@
+run :: (n i32, items [][]u8) void => {
+    ~i := 0
+    @ i < n {
+        println(items[i])
+        i = i + 1
+    }
+}

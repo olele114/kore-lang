@@ -1,0 +1,3 @@
+check :: (x i32) void => {
+    ? x < 0 => ret nil
+}

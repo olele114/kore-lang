@@ -1,0 +1,25 @@
+clamp :: (x i32) i32 => {
+    ? x < 0 => ret 0
+    ? x > 100 => ret 100
+    ret x
+}
+
+test_negative :: () i32 => {
+    ret clamp(-5)
+}
+
+test_too_large :: () i32 => {
+    ret clamp(150)
+}
+
+test_zero :: () i32 => {
+    ret clamp(0)
+}
+
+test_hundred :: () i32 => {
+    ret clamp(100)
+}
+
+main :: () i32 => {
+    ret clamp(42)
+}

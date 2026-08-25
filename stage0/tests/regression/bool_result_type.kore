@@ -1,0 +1,8 @@
+// 回归测试：比较/逻辑运算的结果类型必须是 bool (i1)，不能沿用操作数类型
+main :: (argc i32, argv [][]u8) void => {
+    ~i := 0
+    @ i < argc {
+        print("loop body")
+        i = i + 1
+    }
+}

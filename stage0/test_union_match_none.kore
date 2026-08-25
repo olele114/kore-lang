@@ -1,0 +1,25 @@
+Option :: .Some(i32) | .None
+
+test_some :: () i32 => {
+    x := .Some(42)
+    ? x is {
+        .Some(v) => ret v,
+        .None => ret 0
+    }
+    ret 999
+}
+
+test_none :: () i32 => {
+    y := .None
+    ? y is {
+        .Some(v) => ret v,
+        .None => ret 100
+    }
+    ret 999
+}
+
+main :: () i32 => {
+    a := test_some()
+    b := test_none()
+    ret a + b
+}

@@ -1,0 +1,16 @@
+DEBUG compile_patterns: arms.len()=2, arm_blocks=[BlockId(2), BlockId(3)], fallback=BlockId(3), unreachable=BlockId(3)
+DEBUG compile_patterns: 处理条件守卫 arm[0], block=BlockId(2)
+DEBUG compile_patterns: then_branch = BlockId(2)
+DEBUG compile_patterns: 递归处理剩余 1 个 arms
+DEBUG compile_patterns: arms.len()=1, arm_blocks=[BlockId(3)], fallback=BlockId(3), unreachable=BlockId(3)
+DEBUG compile_patterns: 处理条件守卫 arm[0], block=BlockId(3)
+DEBUG compile_patterns: then_branch = BlockId(3)
+DEBUG compile_patterns: 无剩余 arms，else_branch = fallback BlockId(3)
+DEBUG compile_patterns: 返回 Guard 节点
+DEBUG compile_patterns: 返回 Guard 节点
+lower_ret called, current_block: Some(BlockId(2)), blocks.len(): 4
+lower_ret called, current_block: Some(BlockId(3)), blocks.len(): 5
+Block 2 terminator before check: Return(Some(Const(Int(0)))), is_terminated: true
+Block 3 terminator before check: Return(Some(Const(Int(100)))), is_terminated: true
+lower_ret called, current_block: None, blocks.len(): 5
+lower_ret called, current_block: Some(BlockId(0)), blocks.len(): 1

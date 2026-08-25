@@ -1,0 +1,6 @@
+use test_math
+
+main :: () i32 => {
+    x := test_math.add(10, 20)
+    ret x
+}

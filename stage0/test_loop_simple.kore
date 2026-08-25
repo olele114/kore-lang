@@ -1,0 +1,6 @@
+test :: () void => {
+    @ {
+        print("hello")
+        ret
+    }
+}

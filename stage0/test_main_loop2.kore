@@ -1,0 +1,6 @@
+main :: (argc i32) void => {
+    ~i := 0
+    @ i < argc {
+        ret
+    }
+}

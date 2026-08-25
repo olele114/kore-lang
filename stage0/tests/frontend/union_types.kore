@@ -1,0 +1,36 @@
+// 联合类型测试用例
+
+// 简单联合类型定义
+Result :: .Ok(i32) | .Err(i32)
+
+// 变体构造：无 payload
+Option :: .Some(i32) | .None
+
+test_simple_variant :: () i32 => {
+    x := .Ok(42)
+    ret 0
+}
+
+// 变体构造：有 payload
+test_variant_with_payload :: () i32 => {
+    result := .Ok(100)
+    ret 0
+}
+
+// 变体匹配
+test_variant_match :: () i32 => {
+    opt := .Some(42)
+    ? opt is {
+        .Some(v) => ret v
+        .None => ret 0
+    }
+}
+
+// 嵌套联合类型
+Nested :: .Inner(Result) | .Outer(i32)
+
+test_nested_union :: () i32 => {
+    inner_result := .Ok(99)
+    nested := .Inner(inner_result)
+    ret 0
+}

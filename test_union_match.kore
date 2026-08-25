@@ -1,0 +1,16 @@
+Result :: .Ok(i32) | .Err(i32)
+
+unwrap :: (r Result) i32 => {
+    ? r is {
+        .Ok(v) => ret v,
+        .Err(e) => ret 0 - e
+    }
+}
+
+main :: () i32 => {
+    ok_val := .Ok(42)
+    err_val := .Err(10)
+    a := unwrap(ok_val)
+    b := unwrap(err_val)
+    ret a + b
+}

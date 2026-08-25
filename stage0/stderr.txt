@@ -1,0 +1,2 @@
+This goes to stderrstderr with newline
+Error: something went wrong

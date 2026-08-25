@@ -1,0 +1,75 @@
+[package]
+name = "kore-stage0"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+# stage0 是自举用的最小编译器，只接受 Kore0 子集（ADR 007 Q22）。
+# 自举闭合后归档，因此刻意不追求工程完备度。
+
+[[bin]]
+name = "korec"
+path = "src/main.rs"
+
+[lib]
+name = "kore_stage0"
+path = "src/lib.rs"
+
+# 测试分层：单元测试随代码，集成测试在 tests/ 下分目录。
+[[test]]
+name = "integration"
+path = "tests/integration/main.rs"
+
+[[test]]
+name = "e2e"
+path = "tests/e2e/main.rs"
+
+[[test]]
+name = "determinism"
+path = "tests/determinism/mod.rs"
+
+[[test]]
+name = "unit"
+path = "tests/unit/main.rs"
+
+[[test]]
+name = "adversarial"
+path = "tests/adversarial/mod.rs"
+
+[[test]]
+name = "drop"
+path = "tests/drop/mod.rs"
+
+[[test]]
+name = "defer"
+path = "tests/defer/mod.rs"
+
+[[test]]
+name = "middleend"
+path = "tests/middleend/mod.rs"
+
+# 唯一依赖。刻意不引入 clap（退出码 2 的判定要手控，且 stage1 要把 CLI
+# 机械翻译成 Kore0，不能依赖 clap 形状的 API）与 anyhow（类型擦除与
+# ADR 009 的错误码契约冲突）。
+[dependencies.inkwell]
+version = "0.9.0"
+default-features = false
+features = ["llvm21-1", "target-aarch64", "target-x86"]
+
+[dev-dependencies]
+tempfile = "3"
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bench]]
+name = "frontend"
+harness = false
+
+[profile.dev]
+debug = 1
+
+# 覆盖率配置：排除 benches 和测试辅助代码
+[package.metadata.coverage]
+exclude = [
+    "benches/*",
+    "tests/*/helpers.rs",
+]
